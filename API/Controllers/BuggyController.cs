@@ -18,7 +18,7 @@ namespace API.Controllers
             var thing = _context.Products.Find(42);
             if (thing == null)
             {
-                return NotFound(new ApiReponse(404));
+                return NotFound(new ApiResponse(404));
             }
             return Ok();
 
@@ -36,7 +36,7 @@ namespace API.Controllers
         [HttpGet("badRequest")]
         public ActionResult GetBadRequest()
         {
-            return BadRequest(new ApiReponse(400));
+            return BadRequest(new ApiResponse(400));
 
         }
 

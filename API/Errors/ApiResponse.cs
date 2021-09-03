@@ -2,9 +2,9 @@ using System;
 
 namespace API.Errors
 {
-    public class ApiReponse
+    public class ApiResponse
     {
-        public ApiReponse(int statusCode, string message = null)
+        public ApiResponse(int statusCode, string message = null)
         {
             StatusCode = statusCode;
             Message = message ?? GetDefaultMessageForStatuscode(statusCode);
