@@ -37,7 +37,7 @@ namespace API
             services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepository<>)));
             services.AddAutoMapper(typeof(MappingProfiles));
             services.AddControllers();
-            services.AddDbContext<StoreContext>(x => 
+            services.AddDbContext<StoreContext>(x =>
                 x.UseSqlite(_config.GetConnectionString("DefaultConnection")));
             services.Configure<ApiBehaviorOptions>(options =>
              {
@@ -50,13 +50,13 @@ namespace API
                      var errorResponse = new ApiValidationErrorResponse
                      {
                          Errors = errors
-                         
+
                      };
 
                      return new BadRequestObjectResult(errorResponse);
                  };
 
-            });
+             });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
@@ -67,12 +67,12 @@ namespace API
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseMiddleware<ExceptionMiddleware>();
-            if (env.IsDevelopment())
-            {
-                // app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
-            }
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
+            // if (env.IsDevelopment())
+            // {
+            //     // app.UseDeveloperExceptionPage();
+            // }
             app.UseStatusCodePagesWithReExecute("/errors/{0}");
 
             app.UseHttpsRedirection();
