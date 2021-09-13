@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { IProduct } from '../shared/models/product';
 import { ShopService } from './shop.service';
 import { IBrand } from '../shared/models/brand';
@@ -12,16 +12,18 @@ import { ShopParams } from '../shared/models/shopParams';
   styleUrls: ['./shop.component.scss']
 })
 export class ShopComponent implements OnInit {
+  // if input DOM is optional (*ngif), static: true
+  @ViewChild('search', { static: true }) searchTerm: ElementRef;
   products: IProduct[];
   brands: IBrand[];
   types: IType[];
   shopParams = new ShopParams();
   totalCount: number;
-  
+
   sortOptions = [
-    {name: 'Alphabetical', value:'name'},
-    {name:'Price: Low to High', value:'priceAsc'},
-    {name:'Price: High to Low', value: 'priceDesc'}
+    { name: 'Alphabetical', value: 'name' },
+    { name: 'Price: Low to High', value: 'priceAsc' },
+    { name: 'Price: High to Low', value: 'priceDesc' }
   ];
 
   constructor(private shopService: ShopService) { }
@@ -71,14 +73,26 @@ export class ShopComponent implements OnInit {
     this.getProducts();
   }
 
-  onSortSelected(sort:string) {
+  onSortSelected(sort: string) {
     this.shopParams.sort = sort;
     this.getProducts();
 
   }
-   onPageChanged(event:any){
-     this.shopParams.pageNumber = event;
-     this.getProducts();
-   }
+  onPageChanged(event: any) {
+    this.shopParams.pageNumber = event;
+    this.getProducts();
+  }
+
+  onSearch() {
+    this.shopParams.search = this.searchTerm.nativeElement.value;
+    this.getProducts();
+
+  }
+
+  onReset(){
+    this.searchTerm.nativeElement.value =  '';
+    this.shopParams = new ShopParams();
+    this.getProducts();
+  }
 
 }
