@@ -1,9 +1,9 @@
 <div class="d-flex flex-column flex-md-row align-items-center justify-content-between p-3 px-mb-4 bg-white shadow-sm border-bottom fixed-top">
-    <img src="/assets/images/logo.png" style="max-height: 70px;" alt="logo">
+    <img src="/assets/images/logo.png" style="max-height: 70px;" alt="logo" routerLink="/">
 
     <nav class=" my-2 mt-md-0 ms-md-3 text-uppercase" style="font-size: larger;">
-      <a class=" p-2 text-dark " href="#">Home</a>
-      <a class=" p-2 text-dark " href="#">Shop</a>
+      <a class=" p-2 text-dark " [routerLink]= "['/']" >Home</a>
+      <a class=" p-2 text-dark " routerLink= "/shop">Shop</a>
       <a class=" p-2 text-dark " href="#">Contact</a>
     </nav>
     <div class="d-flex align-items-center">
