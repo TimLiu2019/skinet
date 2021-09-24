@@ -10,8 +10,8 @@ import { IProduct } from '../shared/models/product';
   providedIn: 'root'
 })
 export class BasketService {
-//  baseUrl = 'https://localhost:5001/api/';
-  baseUrl = environment.apiUrl;
+ baseUrl = 'https://localhost:5001/api/';
+ // baseUrl = environment.apiUrl;
   private basketSource = new BehaviorSubject<IBasket>(null);
   basket$ = this.basketSource.asObservable();
 
@@ -30,6 +30,7 @@ export class BasketService {
   setBasket(basket: IBasket){
     return this.http.post(this.baseUrl + 'basket', basket).subscribe((response : IBasket) => {
       this.basketSource.next(response);
+      console.log(response);
     }, error => {
       console.log(error);
     })
@@ -47,6 +48,7 @@ export class BasketService {
   }
 
   private addOrUpdateItem(items: IBasketItem[], itemToAdd: IBasketItem, quantity: number): IBasketItem[] {
+   console.log('items',items);
     const index = items.findIndex(i => i.id === itemToAdd.id);
     if(index === -1){
       itemToAdd.quantity = quantity;
