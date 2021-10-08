@@ -19,7 +19,8 @@ export class LoginComponent implements OnInit {
   }
   createLoginForm(){
     this.loginForm = new FormGroup({
-      email: new FormControl('', Validators.required),
+      // orignal is ^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$, below add '\' escape
+      email: new FormControl('', [Validators.required, Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')]),
       password: new FormControl('',Validators.required)
     });
   }
