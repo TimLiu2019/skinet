@@ -9,6 +9,7 @@ namespace API.Dtos
     public class OrderToReturnDto
     {
         public int Id { get; set; }
+        public string BuyerEmail { get; set; }
         public DateTimeOffset OrderDate  { get; set; } 
         public Address ShipToAddress { get; set; }
         public string DeliveryMethod { get; set; }
