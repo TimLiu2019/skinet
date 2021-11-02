@@ -1,1 +1,13 @@
-<p>order-detailed works!</p>
+<div class="container mt-5">
+    <div class="row" *ngIf="order">
+      <div class="col-8">
+        <app-basket-summary
+          [items]="order.orderItems"
+          [isBasket]="false"
+          [isOrder]="true"
+      ></app-basket-summary>
+      </div>
+
+    </div>
+  
+  </div>
